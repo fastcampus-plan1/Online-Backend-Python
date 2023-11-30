@@ -1,3 +1,4 @@
+# 상속 클래스 정의하기
 # 부모 클래스
 class Person:
     def _init_(self, name, job):
@@ -19,4 +20,6 @@ actor_song = Actor("송강호", best_movie="기생층")
 
 # 상속된 메서드 사용
 actor_song.introduce() # 제 이름은 송강호 입니다. 직업은 배우 입니다.
-actor_song.filmography() # 대표 작품은 기생충 입니다
+actor_song.filmography() # 대표 작품은 기생충 입니다.
+
+

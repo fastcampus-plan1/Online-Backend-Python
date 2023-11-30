@@ -1,0 +1,11 @@
+# 8장 - 정규 표현식
+- 이론 강의자료
+    - [메일 주소 찾기](./lecture/email.py)  
+    - [search와 match](./lecture/search_match.py)  
+    - [re.sub을 활용한 문자열 대체](./lecture/sub.py)
+    - [핸드폰 번호 추출하기](./lecture/mobile.py)
+    - [csv파일 처리하기](./lecture/csv.py)
+    - [순서 바꾸기](./lecture/position.py)
+    - [개인정보 마스킹하기](./lecture/masking.py)
+    - [HTML 태그 제거하기](./lecture/strip_html.py)
+    - [주민번호에서 생년월일 추출하기](./lecture/ssn.py)
