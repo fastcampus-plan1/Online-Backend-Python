@@ -1,0 +1,14 @@
+# 5장 - 함수와 모듈
+- 이론 강의자료
+    - [함수 바로가기](./lecture/function.py)
+    - [매개변수 바로가기](./lecture/parameter.py)
+    - [모듈 바로가기](./lecture/module)  
+    - [라이브러리 바로가기](./lecture/library.py)  
+- 실습 강의자료  
+    - [함수 바로가기](./practice/function.py)
+    - [매개변수 바로가기](./practice/parameter.py)
+    - [모듈 기본 바로가기](./practice/module_basic/)
+    - [계산기 모듈 바로가기](./practice/calc/)
+    - [기본 라이브러리: Datetime](./practice/dt_library.py)
+    - [기본 라이브러리: Random](./practice/rand_library.py)
+    - [외부 라이브러리: Requests](./practice/req_library.py)
