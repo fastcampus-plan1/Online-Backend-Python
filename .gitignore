@@ -1,0 +1,47 @@
+# Python
+*.pyc
+__pycache__/
+venv/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.*
+
+# Dependencies
+/.venv/
+/.env/
+
+# Compiled files
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.dll
+*.exe
+*.out
+*.bin
+*.iso
+*.bak
+*.tmp
+*.swp
+*.swo
+*.log
+*.pid
+*.coverage
+.coverage
+htmlcov/
+.coverage.xml
+.tox/
+nosetests.xml
+coverage.xml
+*.egg-info/
