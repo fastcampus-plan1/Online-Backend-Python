@@ -21,6 +21,9 @@ class FastcampusspiderSpider(scrapy.Spider):
         "https://fastcampus.co.kr/.api/www/categories/10/page",
         "https://fastcampus.co.kr/.api/www/categories/10/page",
         "https://fastcampus.co.kr/.api/www/categories/10/page",
+        "https://fastcampus.co.kr/.api/www/categories/10/page",
+        "https://fastcampus.co.kr/.api/www/categories/10/page",
+        "https://fastcampus.co.kr/.api/www/categories/10/page",
     ]
 
     def parse(self, response):
