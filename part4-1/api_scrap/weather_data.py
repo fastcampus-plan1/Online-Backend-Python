@@ -5,12 +5,12 @@ def get_weather_data():
     params = {
         "serviceKey": "Bq0l9/ERQCCvnzlvO1w3HjM0r/0P+hQVG1hZGhq5T4XLiDLTY/KSazsy5oQRRhwXVwZ9YnpM8AvNR1iSUObYTQ==",
         "dataType": "JSON",
-        "numOfRows": 10,
+        "numOfRows": 20,
         "pageNo": 1,
         "dataCd": "ASOS",
         "dateCd": "DAY",
-        "startDt": "20240101",
-        "endDt": "20240106",
+        "startDt": "20230701",
+        "endDt": "20230720",
         "stnIds": "108"
     }
 
@@ -107,7 +107,6 @@ def get_weather_data():
         item_list = data["response"]["body"]["items"]["item"]
         dict_list = []
         for item in item_list:
-            print(item)
             item_dict = {}
             item_dict["date"] = item["tm"]
             item_dict["min_temp"] = item["minTa"]
