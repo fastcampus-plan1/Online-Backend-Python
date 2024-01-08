@@ -8,6 +8,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
+from api_scrap.geocoding import geocode_address
+
 def get_data_from_kakaomap():
     try:
         service = Service(ChromeDriverManager().install())
@@ -76,7 +78,9 @@ def get_items(html: str, parsed_items: list):
         item_dict["name"] = item.find('span', {'data-id': 'screenOutName'}).text
         item_dict["score"] = item.find('em', {'data-id': 'scoreNum'}).text
         item_dict["address"] = item.find('p', {'data-id': 'address'}).text
+        item_dict["lat_lng"] = geocode_address(item.find('p', {'data-id': 'address'}).text)
         item_dict["hour"] = item.find('a', {'data-id': 'periodTxt'}).text
         parsed_items.append(item_dict)
+        
 
     return parsed_items
