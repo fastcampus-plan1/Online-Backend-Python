@@ -5,6 +5,7 @@ venv/
 *.egg-info/
 dist/
 build/
+*-checkpoint.py
 
 # IDE
 .vscode/
