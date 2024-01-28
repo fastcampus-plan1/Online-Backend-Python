@@ -4,8 +4,8 @@ CREATE TABLE restaurants (
     area_name VARCHAR(100),
     address TEXT,
     phone VARCHAR(20),
-    cusine_type ENUM('한식', '양식', '중식', '일식', '디저트', '기타'),
-    category ENUM('category1', 'category2', 'category3'),
+    cusine_type VARCHAR(20), -- ENUM('한식', '양식', '중식', '일식', '디저트', '기타'),
+    category VARCHAR(20), -- ENUM('category1', 'category2', 'category3'),
     tags TEXT,
     image_urls TEXT,
     menu JSON,
@@ -16,8 +16,8 @@ CREATE TABLE restaurants (
     end_time TIME,
     latitude DECIMAL(9, 6),
     longitude DECIMAL(9, 6),
-    created_at DATETIME,
-    updated_at DATETIME
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 
