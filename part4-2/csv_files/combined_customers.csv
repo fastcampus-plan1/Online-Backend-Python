@@ -123,7 +123,7 @@ customer_id,name,age,email,join_date
 22,Customer22,43.0,customer22@example.com,2023-04-12 06:54:12.149523
 23,Customer23,23.0,customer23@example.com,2023-07-22 06:54:12.149529
 24,Customer24,46.0,customer24@example.com,2023-07-20 06:54:12.149534
-25,Customer25,69.0,customer25@example.com,2023-08-29 06:54:12.149540
+25,Customer25,690.0,customer25@example.com,2023-08-29 06:54:12.149540
 26,Customer26,45.0,customer26@example.com,2023-05-22 06:54:12.149545
 27,Customer27,34.0,customer27@example.com,2023-11-18 06:54:12.149551
 28,Customer28,31.0,customer28@example.com,2023-03-26 06:54:12.149556
