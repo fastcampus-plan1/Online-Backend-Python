@@ -1,0 +1,9 @@
+customer_id,name,age,email,join_date
+101,Customer1001,32.0,customer1001@example.com,2023-01-27 06:52:22.275679
+102,Customer1002,44.0,customer1002@example.com,2023-07-15 06:52:22.275698
+103,Customer1003,43.0,customer1003@example.com,2023-01-24 06:52:22.275704
+104,Customer1004,51.0,customer1004@example.com,2023-03-25 06:52:22.275709
+105,Customer1005,28.0,customer1005@example.com,2023-03-25 06:52:22.275713
+106,Customer1006,21.0,customer1006@example.com,2023-03-26 06:52:22.275713
+107,Customer1007,22.0,customer1007@example.com,2023-03-27 06:52:22.275713
+108,Customer1008,45.0,customer1008@example.com,2023-03-28 06:52:22.275713
