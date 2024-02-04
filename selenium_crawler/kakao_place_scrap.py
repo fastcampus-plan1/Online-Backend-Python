@@ -46,9 +46,24 @@ def scrap_kakao_place_info(place_id):
         title = a_tag.find('strong', class_='tit_story')
         review_list.append((title.text, a_tag["href"]))
     
+
+    # Menu
+    menu_list = []
+    menu_div = soup.find_all("div", class_="info_menu")
+    for m in menu_div:
+        menu_span = m.find("span", class_="loss_word")
+        price_em = m.find("em", class_="price_menu")
+        screen_out_el = price_em.find("span", class_="screen_out")
+        if screen_out_el:
+            screen_out_el.decompose()
+        menu_item = {"name": menu_span.text, "price": price_em.text}
+        menu_list.append(menu_item)
+    
+
     return {
         "tags": ["".join(t.split()) for t in texts],
-        "review_list": review_list
+        "review_list": review_list,
+        "menu_item": menu_list,
     }
 
 
