@@ -1,3 +1,4 @@
+import time
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
@@ -15,6 +16,14 @@ def scrap_kakao_place_info(place_id):
 
     wait = WebDriverWait(driver, 10)
     wait.until(ec.visibility_of_element_located((By.CLASS_NAME, "link_tag")))
+    
+    # Review
+    review_more_btn = driver.find_element(By.XPATH, "//div[@class='cont_review']//div[@class='wrap_list']//a[@class='link_more']")
+    if review_more_btn:
+        for _ in range(2):
+            review_more_btn.click()
+            time.sleep(1)
+
     html_content = driver.page_source
     driver.quit()
 
@@ -29,6 +38,17 @@ def scrap_kakao_place_info(place_id):
     if list_facility:
         facility_tags = list_facility.find_all('span', class_='color_g')
         texts += [tag.text for tag in facility_tags]
-    return ["".join(t.split()) for t in texts]
+
+    # Review
+    review_list = []
+    review_a_tags = soup.find_all('a', class_='link_review')
+    for a_tag in review_a_tags:
+        title = a_tag.find('strong', class_='tit_story')
+        review_list.append((title.text, a_tag["href"]))
+    
+    return {
+        "tags": ["".join(t.split()) for t in texts],
+        "review_list": review_list
+    }
 
 
