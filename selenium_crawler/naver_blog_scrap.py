@@ -52,3 +52,19 @@ def crawl_naver_blog_by_requests(url):
     content = re.sub(r"\n+", " ", content)
     
     return content
+
+
+def find_reivew_article(location: str, keyword: str):
+    url = f"https://search.naver.com/search.naver?sm=tab_hty.top&ssc=tab.blog.all&query={location}+{keyword}+리뷰"
+    res = requests.get(url)
+
+    soup = BeautifulSoup(res.text, "html.parser")
+    title_link = soup.find_all("a", class_="title_link")
+    review_list = []
+    for t_l in title_link:
+        title = t_l.text
+        href = t_l["href"]
+        if keyword in title:
+            review_list.append((title, href))
+
+    return review_list
