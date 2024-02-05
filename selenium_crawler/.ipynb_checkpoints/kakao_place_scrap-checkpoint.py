@@ -8,9 +8,6 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as ec
 
-
-
-
 def scrap_kakao_place_info(place_id):
     url = f"https://place.map.kakao.com/{place_id}"
     service = Service(ChromeDriverManager().install())
