@@ -1,5 +1,12 @@
 from django.contrib import admin
 from django.db.models import Count
+from django.http.request import HttpRequest
+from django.template.response import TemplateResponse
+import pandas as pd
+import plotly.express as px
+from plotly.offline import plot
+
+from io import BytesIO
 
 from .models import Restaurants, RestaurantBlogReviews
 
@@ -14,6 +21,31 @@ class RestaurantBlogReviewsInline(admin.TabularInline):
 
 
 class RestaurantAdmin(admin.ModelAdmin):
+    change_list_template = "restaurant_change_list.html"
+
+    def create_plotly_chart(self):
+        qs = Restaurants.objects.values("category").annotate(count=Count('id'))
+        df = pd.DataFrame(list(qs))
+
+        fig = px.bar(
+            df, 
+            x="category", 
+            y="count", 
+            labels={"count": "count", "category": "Category"},
+
+        )
+
+        graph_html = plot(fig, output_type="div", include_plotlyjs=True)
+        return graph_html
+
+
+    def changelist_view(self, request: HttpRequest, extra_context=None) -> TemplateResponse:
+        graph_html = self.create_plotly_chart()        
+        extra_context = extra_context or {}
+        extra_context["graph_html"] = graph_html
+        
+        return super().changelist_view(request, extra_context=extra_context)
+
     # 리스트 뷰 커스터마이징
     list_display = ('name', 'cuisine_type', 'category', 'rating', 'rating_count', "blog_reviews_count")
     list_filter = ('cuisine_type', 'category', )
@@ -39,7 +71,7 @@ class RestaurantAdmin(admin.ModelAdmin):
             # 테이블하나 생성하세요. 
             # id와 카카오 플레이스 id를 해당 테이블에 삽입
             # 이미 수집중인 리뷰가 있다면, 해당 내용은 수집등록하지 않습니다.
-            
+
             print(obj.id, obj.kakao_place_id)
         self.message_user(request, "리뷰 수집이 성공적으로 등록되었습니다.")
     custom_action.short_description = "리뷰 수집하기"

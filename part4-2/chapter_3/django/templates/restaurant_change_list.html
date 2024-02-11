@@ -1,0 +1,8 @@
+{% extends "admin/change_list.html" %}
+{% block content %}
+    {{ graph_html|safe }}
+    <div>
+        <img src="data:image/png;base64,{{ matplot_lib_img }}" alt="Graph">
+    </div>
+    {{ block.super }}
+{% endblock %}
