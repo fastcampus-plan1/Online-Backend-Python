@@ -2,15 +2,16 @@ from django.contrib import admin
 from django.db.models import Count
 from django.http.request import HttpRequest
 from django.template.response import TemplateResponse
+
 import pandas as pd
 import plotly.express as px
 from plotly.offline import plot
-
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import base64
 from io import BytesIO
 
-import pandas as pd
-import plotly.express as px
-from plotly.offline import plot
 
 from .models import Restaurants, RestaurantBlogReviews
 
@@ -30,18 +31,46 @@ class RestaurantAdmin(admin.ModelAdmin):
     def create_plotly_chart(self):
        # 예시 데이터로 그래프 생성
        qs = Restaurants.objects.values('category').annotate(count=Count('id'))
-       df = pd.DataFrame(list(qs.values()))
-       fig = px.bar(df, x='category', y='count', labels={'count':'Number of Restaurants', 'category': 'Category'})
+       df = pd.DataFrame(list(qs))
+       fig = px.bar(
+           df, 
+           x='category', 
+           y='count', 
+           color="category",
+           labels={'count':'Number of Restaurants', 'category': 'Category'},
+           width=1200,
+           height=500,
+       )
 
        # Plotly 그래프를 HTML 문자열로 변환
        graph_html = plot(fig, output_type='div', include_plotlyjs=True)
        return graph_html
-  
+    
+    def create_mpl_chart(self):
+       qs = Restaurants.objects.values('category').annotate(count=Count('id'))
+       df = pd.DataFrame(list(qs))
+
+       plt.figure()
+       plt.bar(df['category'], df['count'])
+       plt.ylabel("counts")
+       plt.xlabel("category")
+       plt.title("restaurant counts")
+
+       buf = BytesIO()
+       plt.savefig(buf, format="png")
+       buf.seek(0)
+
+       img_base64 = base64.b64encode(buf.getvalue()).decode("utf-8")
+       buf.close()
+       return img_base64
+
     def changelist_view(self, request, extra_context=None):
        # 그래프 HTML 생성
        graph_html = self.create_plotly_chart()
+       mpl_img = self.create_mpl_chart()
        extra_context = extra_context or {}
        extra_context['graph_html'] = graph_html
+       extra_context['mpl_img'] = mpl_img
 
        return super().changelist_view(request, extra_context=extra_context)
 

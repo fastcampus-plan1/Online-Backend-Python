@@ -2,7 +2,7 @@
 {% block content %}
     {{ graph_html|safe }}
     <div>
-        <img src="data:image/png;base64,{{ matplot_lib_img }}" alt="Graph">
+        <img src="data:image/png;base64,{{ mpl_img }}" alt="Graph">
     </div>
     {{ block.super }}
 {% endblock %}
