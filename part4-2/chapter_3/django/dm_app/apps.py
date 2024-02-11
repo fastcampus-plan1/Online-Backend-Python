@@ -4,3 +4,4 @@ from django.apps import AppConfig
 class DmAppConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "dm_app"
+    verbose_name = "DM데이터"

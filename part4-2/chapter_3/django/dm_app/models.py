@@ -16,10 +16,17 @@ class RestaurantBlogReviews(models.Model):
     restaurant = models.ForeignKey('Restaurants', models.DO_NOTHING, blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
-
+    
+    def __str__(self):
+        return f"{self.id}: {self.title}"
+    
     class Meta:
         managed = False
         db_table = 'restaurant_blog_reviews'
+        verbose_name = "레스토랑 블로그 리뷰"
+        verbose_name_plural = "레스토랑 블로그 리뷰s"
+
+
 
 
 class Restaurants(models.Model):
@@ -42,6 +49,11 @@ class Restaurants(models.Model):
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
 
+    def __str__(self):
+        return f"{self.id}: {self.name}"
+    
     class Meta:
         managed = False
         db_table = 'restaurants'
+        verbose_name = "레스토랑"
+        verbose_name_plural = "레스토랑s"
