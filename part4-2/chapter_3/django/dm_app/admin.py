@@ -33,7 +33,17 @@ class RestaurantAdmin(admin.ModelAdmin):
     
     blog_reviews_count.admin_order_field = '_blog_reviews_count'
     blog_reviews_count.short_description = 'Blog Reviews Count'
-    
+
+    def custom_action(self, request, queryset):
+        for obj in queryset:
+            # 테이블하나 생성하세요. 
+            # id와 카카오 플레이스 id를 해당 테이블에 삽입
+            # 이미 수집중인 리뷰가 있다면, 해당 내용은 수집등록하지 않습니다.
+            
+            print(obj.id, obj.kakao_place_id)
+        self.message_user(request, "리뷰 수집이 성공적으로 등록되었습니다.")
+    custom_action.short_description = "리뷰 수집하기"
+    actions = [custom_action]
 
     # 디테일 뷰 커스터마이징
     inlines = [RestaurantBlogReviewsInline]
