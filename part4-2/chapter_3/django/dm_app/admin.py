@@ -8,6 +8,10 @@ from plotly.offline import plot
 
 from io import BytesIO
 
+import pandas as pd
+import plotly.express as px
+from plotly.offline import plot
+
 from .models import Restaurants, RestaurantBlogReviews
 
 
@@ -24,27 +28,23 @@ class RestaurantAdmin(admin.ModelAdmin):
     change_list_template = "restaurant_change_list.html"
 
     def create_plotly_chart(self):
-        qs = Restaurants.objects.values("category").annotate(count=Count('id'))
-        df = pd.DataFrame(list(qs))
+       # 예시 데이터로 그래프 생성
+       qs = Restaurants.objects.values('category').annotate(count=Count('id'))
+       df = pd.DataFrame(list(qs.values()))
+       fig = px.bar(df, x='category', y='count', labels={'count':'Number of Restaurants', 'category': 'Category'})
 
-        fig = px.bar(
-            df, 
-            x="category", 
-            y="count", 
-            labels={"count": "count", "category": "Category"},
+       # Plotly 그래프를 HTML 문자열로 변환
+       graph_html = plot(fig, output_type='div', include_plotlyjs=True)
+       return graph_html
+  
+    def changelist_view(self, request, extra_context=None):
+       # 그래프 HTML 생성
+       graph_html = self.create_plotly_chart()
+       extra_context = extra_context or {}
+       extra_context['graph_html'] = graph_html
 
-        )
+       return super().changelist_view(request, extra_context=extra_context)
 
-        graph_html = plot(fig, output_type="div", include_plotlyjs=True)
-        return graph_html
-
-
-    def changelist_view(self, request: HttpRequest, extra_context=None) -> TemplateResponse:
-        graph_html = self.create_plotly_chart()        
-        extra_context = extra_context or {}
-        extra_context["graph_html"] = graph_html
-        
-        return super().changelist_view(request, extra_context=extra_context)
 
     # 리스트 뷰 커스터마이징
     list_display = ('name', 'cuisine_type', 'category', 'rating', 'rating_count', "blog_reviews_count")
