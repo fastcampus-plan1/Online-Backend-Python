@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_extensions",
     "fdc.apps.FDCConfig",
+    "dm_app",
 ]
 
 MIDDLEWARE = [
@@ -101,6 +102,7 @@ DATABASES = {
     }
 }
 
+DATABASE_ROUTERS = ["fc.model_routers.DmAppRouter"]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
