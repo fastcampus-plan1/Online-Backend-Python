@@ -10,10 +10,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.11]
-        architecture: [arm64]
 
     steps:
     - name: Checkout repository
