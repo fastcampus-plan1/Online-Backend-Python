@@ -1,0 +1,51 @@
+name: Lambda Function Deployment
+
+on:
+  push:
+    branches:
+      - P4-2/Ch04/Clip09
+    paths:
+      - 'last_chapter/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.11]
+        architecture: [arm64]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+        architecture: ${{ matrix.architecture }}
+
+    - name: Install dependencies
+      run: |
+        cd last_chapter/model_creator
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: "arn:aws:iam::[AWS_ACCOUNT_ID]:role/[YOUR_IAM_ROLE]"
+        aws-region: "ap-northeast-2"
+
+    - name: Zip the lambda function
+      run: |
+        cd last_chapter/model_creator
+        zip -r function.zip .
+
+    - name: Deploy to AWS Lambda
+      uses: appleboy/lambda-action@master
+      with:
+        function_name: "fc-python-online"
+        region: "ap-northeast-2"
+        zip_file: "last_chapter/model_creator/function.zip"
+        handler_name: "lambda_function.lambda_handler"
