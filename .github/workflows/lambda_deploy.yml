@@ -39,4 +39,4 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         function_name: "fc-python-online"
         aws_region: "ap-northeast-2"
-        zip_file: "function.zip"
+        zip_file: "last_chapter/model_creator/function.zip"
