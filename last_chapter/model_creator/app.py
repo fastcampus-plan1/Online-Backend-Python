@@ -1,11 +1,16 @@
+import joblib
+import boto3
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
 
-def load_and_preprocess_data(path: str):
-    data = pd.read_csv(path)
+def load_and_preprocess_data():
+    file_s3 = boto3.client('s3')
+    file_s3.download_file('fc-python-package', 'weather_data_updated.csv', 'weather_data_updated.csv')
+    data = pd.read_csv('weather_data_updated.csv')
+
 
     # 결측치 처리
     data.fillna(method='ffill', inplace=True)
@@ -37,7 +42,7 @@ def train_and_predict(X, y):
     return model
 
 def create_model():
-    data = load_and_preprocess_data('csv/weather_data_updated.csv')   
+    data = load_and_preprocess_data()   
     # 이상치 제거
     for column in data.select_dtypes(include=['float64', 'int64']).columns:
         data = remove_outliers(data, column)
@@ -52,6 +57,8 @@ def create_model():
         ])
 
     X_processed = preprocessor.fit_transform(X)
+    model = train_and_predict(X_processed, y)
+    s3 = boto3.resource('s3')
+    s3.Bucket('fc-python-package').put_object(Key='model_joblib.pkl', Body=joblib.dumps(model))
 
-    return train_and_predict(X_processed, y)
-
+    return {}
