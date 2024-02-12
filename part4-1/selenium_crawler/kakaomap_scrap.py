@@ -8,8 +8,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
-from api_scrap.geocoding import geocode_address
-
 def get_data_from_kakaomap():
     try:
         service = Service(ChromeDriverManager().install())
@@ -27,14 +25,14 @@ def get_data_from_kakaomap():
         search_input.send_keys(Keys.ENTER)
         wait = WebDriverWait(driver, 10)
         wait.until(ec.element_to_be_clickable((By.ID, "info.search.place.more")))
-
         driver.execute_script("""
-            var element = document.getElementById('dimmedLayer')
-            if (element) {
-                element.className = 'DimmedLayer HIDDEN';
-            }
+        var element = document.getElementById('dimmedLayer');
+        if (element) {
+            element.className = 'DimmedLayer HIDDEN';
+        }
         """)
 
+        sleep(1)
         show_more_btn = driver.find_element(By.ID, "info.search.place.more")
         show_more_btn.click()
 
@@ -45,9 +43,16 @@ def get_data_from_kakaomap():
         items = []
 
         while page_count <= 5:
+            if page_count != 0 and page_count % 5 == 0:
+                page_next_btn_id = "info.search.page.next"
+                next_btn = driver.find_element(By.ID, page_next_btn_id)
+                next_btn.click()
+                wait = WebDriverWait(driver, 10)
+                wait.until(ec.visibility_of_element_located((By.ID, "info.search.place.list")))
+
             page_count += 1
             page_num = page_count % 5 if page_count % 5 != 0 else 5
-
+      
             page_btn_id = f"info.search.page.no{page_num}"
             next_btn = driver.find_element(By.ID, page_btn_id)
             next_btn.click()
@@ -59,7 +64,7 @@ def get_data_from_kakaomap():
 
             get_items(shop_list, items)
             sleep(2)
-
+        # 검색 결과 확인
         
         driver.quit()
         return items
@@ -78,9 +83,7 @@ def get_items(html: str, parsed_items: list):
         item_dict["name"] = item.find('span', {'data-id': 'screenOutName'}).text
         item_dict["score"] = item.find('em', {'data-id': 'scoreNum'}).text
         item_dict["address"] = item.find('p', {'data-id': 'address'}).text
-        item_dict["lat_lng"] = geocode_address(item.find('p', {'data-id': 'address'}).text)
         item_dict["hour"] = item.find('a', {'data-id': 'periodTxt'}).text
         parsed_items.append(item_dict)
-        
 
     return parsed_items
