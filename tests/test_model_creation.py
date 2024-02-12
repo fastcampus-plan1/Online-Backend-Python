@@ -24,8 +24,8 @@ def test_create_model(mocked_read_csv):
     model = create_model()
 
     # 반환된 모델 검증
-    assert model is not None, "Model should not be None"
-    assert isinstance(model, RandomForestClassifier), "Model should be an instance of RandomForestClassifier"
+    assert model is not None, "!!should not be None"
+    assert isinstance(model, RandomForestClassifier), "!!should be an instance of RandomForestClassifier"
 
     # 모킹된 read_csv 함수가 호출되었는지 확인
     mocked_read_csv.assert_called_once_with('csv/weather_data_updated.csv')
