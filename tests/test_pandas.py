@@ -35,7 +35,6 @@ join_date
     
     # 함수 실행
     result_df = process_join_dates(test_data)
-    
     # 결과 검증
     expected_years = [2020, 2021, 2022]
     expected_months = [1, 2, 3]
