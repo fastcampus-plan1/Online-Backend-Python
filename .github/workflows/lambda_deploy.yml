@@ -6,6 +6,7 @@ on:
       - P4-2/Ch04/Clip09
     paths:
       - 'last_chapter/**'
+      - '.github/workflows/**'
 
 jobs:
   deploy:
