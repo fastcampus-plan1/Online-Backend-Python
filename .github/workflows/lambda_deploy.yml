@@ -37,7 +37,6 @@ jobs:
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        function_name: "your_lambda_function_name"
-        region: "your_aws_region"
-        zip_file: "your_zip_file.zip"
-        handler_name: "lambda_function.lambda_handler"
+        function_name: "fc-python-online"
+        aws_region: "ap-northeast-2"
+        zip_file: "function.zip"
