@@ -122,7 +122,35 @@ class RestaurantAdmin(admin.ModelAdmin):
 
 
 class RestaurantBlogReviewAdmin(admin.ModelAdmin):
-    list_display = ("title", "blog_url", "published_date", "restaurant_name")
+    change_list_template = "restaurant_change_list.html"
+
+    def create_plotly_chart(self):
+        qs = RestaurantBlogReviews.objects.values("restaurant_id", "published_date").annotate(review_count=Count('id')).order_by("restaurant_id", "published_date")
+
+        df = pd.DataFrame(list(qs))
+
+        fig = px.line(
+            df,
+            x="published_date",
+            y="review_count",
+            color="restaurant_id",
+            title="Review Trend",
+            width=1200,
+            height=500,
+        )
+
+        graph_html = plot(fig, output_type="div", include_plotlyjs=True)
+        return graph_html
+    
+    def changelist_view(self, request, extra_context=None):
+       # 그래프 HTML 생성
+       graph_html = self.create_plotly_chart()
+       extra_context = extra_context or {}
+       extra_context['graph_html'] = graph_html
+
+       return super().changelist_view(request, extra_context=extra_context)
+    
+    list_display = ("title", "blog_url", "published_date", "restaurant_id", "restaurant_name")
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
