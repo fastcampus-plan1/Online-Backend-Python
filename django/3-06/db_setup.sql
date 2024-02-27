@@ -1,0 +1,4 @@
+CREATE DATABASE IF NOT EXISTS `product_db`;
+CREATE USER IF NOT EXISTS 'db_user'@'%' IDENTIFIED BY 'db_password';
+GRANT ALL PRIVILEGES ON `product_db`.* TO 'db_user'@'%';
+FLUSH PRIVILEGES;
