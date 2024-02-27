@@ -43,8 +43,25 @@ https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/eb-cli3-install-win
 EB CLI 설치 (macOS)
 https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/eb-cli3-install-osx.html
 
+## Git
+Git 설치
+https://git-scm.com/book/ko/v2/시작하기-Git-설치
+
+설치 후에
+```zsh
+git init
+
+git add .
+
+git commit -m "Initial Commit"
+```
+
+## 좀 더 안전하게 DB 사용자를 추가하려면
+db_setup.sql 참고
+
 ## Deployment
 
+```zsh
 eb init
 
 eb create \
@@ -54,3 +71,4 @@ eb create \
  --envvars PRODUCTION=1,DB_NAME=product_db,DB_USER=db_user,DB_PASSWORD=비밀번호,DB_HOST=DB엔드포인트 \
  --vpc.elbpublic \
  --vpc.publicip
+```
