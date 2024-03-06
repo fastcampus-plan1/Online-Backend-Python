@@ -1,6 +1,6 @@
 # Introduction
 
-Django Admin 샘플 코드 #
+Django Relationship fields 샘플 코드
 
 ## Preparation
 
@@ -46,7 +46,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-## 스크립트 실행
+## 쿼리 예제 스크립트 실행
 
 ```zsh
 python manage.py shell < foreign_key.py
