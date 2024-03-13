@@ -144,10 +144,10 @@ if not DEBUG and os.environ.get("S3_BUCKET"):
             "OPTIONS": {
                 "bucket_name": os.environ.get("S3_BUCKET"),
                 "region_name": os.environ.get("S3_REGION", "ap-northeast-2"),
+                "custom_domain": os.environ.get("S3_CUSTOM_DOMAIN"),
                 "location": "media", 
-                "default_acl": "private",
-                "querystring_auth": True,
-                "signature_version": "s3v4",
+                "default_acl": "public-read",
+                "querystring_auth": False,
             },
         },
         "staticfiles": {
@@ -155,6 +155,7 @@ if not DEBUG and os.environ.get("S3_BUCKET"):
             "OPTIONS": {
                 "bucket_name": os.environ.get("S3_BUCKET"),
                 "region_name": os.environ.get("S3_REGION", "ap-northeast-2"),
+                "custom_domain": os.environ.get("S3_CUSTOM_DOMAIN"),
                 "location": "static", 
                 "default_acl": "public-read",
                 "querystring_auth": False,
