@@ -72,3 +72,6 @@ celerybeat.pid
 
 # Static files
 /static/
+
+# System generated files
+.DS_Store

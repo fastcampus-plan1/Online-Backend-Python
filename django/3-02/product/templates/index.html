@@ -1,0 +1,37 @@
+{% extends "_base.html" %}
+
+{% block title %}링크{% endblock %}
+
+{% block contents %}
+<h1>링크</h1>
+<p>
+  <a href="{% url 'admin:index' %}">Admin Page</a>
+</p>
+{% if user.is_authenticated %}
+<p>안녕하세요, {{ user.username }}님</p>
+<form method="post" action="{% url 'product:logout' %}">
+{% csrf_token %}
+<button type="submit">로그아웃</button>
+</form>
+{% else %}
+<a href="{% url 'product:login' %}">로그인</a>
+{% endif %}
+
+{# view1 ~ view 3 #}
+<h3>로그인 확인 뷰</h3>
+<ul>
+  <li><a href="{% url 'product:view1' %}" target="_blank">view1</a></li>
+  <li><a href="{% url 'product:view2' %}" target="_blank">view2</a></li>
+  <li><a href="{% url 'product:view3' %}" target="_blank">view3</a></li>
+</ul>
+
+{# 재고 수정 권한이 있는지 메시지 표시 #}
+<h3>권한 확인 뷰</h3>
+{% if perms.product.can_update_stock %}
+<p>재고 수정 권한이 있습니다.</p>
+{% else %}
+<p>재고 수정 권한이 없습니다.</p>
+{% endif %}
+<a href="{% url 'product:increase_stock' %}" target="_blank">재고 추가</a>
+<a href="{% url 'product:decrease_stock' %}" target="_blank">재고 차감</a>
+{% endblock %}

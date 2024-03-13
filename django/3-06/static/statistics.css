@@ -1,0 +1,10 @@
+.chart canvas {
+  width:900px;
+}
+
+
+@media (max-width: 1024px) {
+  .chart canvas {
+    width: 100% !important;
+  }  
+}
