@@ -23,6 +23,7 @@ class Migration(migrations.Migration):
             name="럭셔리 가죽 자켓",
             price=150000,
             description="최고급 가죽으로 제작된 럭셔리 자켓으로, 시간이 지날수록 더욱 멋스러워집니다.\n자연스러운 페이딩과 부드러운 질감이 특징입니다. 어떤 룩에도 풍부한 개성을 더해줍니다.",
+            image="product/leather_jacket.webp"
         )
         product4 = Product.objects.create(
             name="윈터 퍼퍼",

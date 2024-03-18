@@ -1,0 +1,19 @@
+rm -Rf .venv
+rm db.sqlite3
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+
+export DJANGO_SUPERUSER_USERNAME=admin
+export DJANGO_SUPERUSER_EMAIL=admin@example.com
+export DJANGO_SUPERUSER_PASSWORD=password
+
+python manage.py createsuperuser --noinput
+
+git init
+git add .
+git commit -m "Initial Commit"
+
+pip3 install pre-commit
+pre-commit install

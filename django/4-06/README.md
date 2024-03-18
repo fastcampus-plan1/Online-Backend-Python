@@ -1,6 +1,6 @@
 # Introduction
 
-Django Elastic Beanstalk 배포
+Django Elastic Beanstalk 배포 #2
 
 ## Preparation
 
@@ -42,6 +42,13 @@ https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/eb-cli3-install-win
 
 EB CLI 설치 (macOS)
 https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/eb-cli3-install-osx.html
+
+## AWS 준비
+
+- EC2 가 사용할 보안그룹을 하나 준비하고 해당 보안그룹아이디를 이용하여 EB 환경을 생성해야 합니다.
+- RDS 인스턴스를 하나 생성하고 외부 접속을 허용한 다음 EC2가 사용할 보안그룹에도 MySQL 접속을 허용해줍니다.
+- IAM에서 `aws-elasticbeanstalk-ec2-role` 에 S3 Full Access 등 해당 버킷의 쓰기 권한을 얼여줘야 합니다.
+
 
 ## Git
 
