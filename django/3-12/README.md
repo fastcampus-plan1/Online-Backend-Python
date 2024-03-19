@@ -1,6 +1,7 @@
 # Introduction
 
-Django Admin 샘플 코드 #
+Django Admin 샘플 코드
+Management Command
 
 ## Preparation
 
@@ -50,4 +51,12 @@ python manage.py createsuperuser
 
 ```zsh
 python manage.py runserver
+```
+
+## Exportproducts
+
+```zsh
+python manage.py exportproducts
+
+python manage.py exportproducts --separator ,
 ```

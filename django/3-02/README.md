@@ -1,7 +1,7 @@
 # Introduction
 
-Django Admin 샘플 코드 #
-Permission
+Django Admin 샘플 코드
+Permission Check
 
 ## Preparation
 

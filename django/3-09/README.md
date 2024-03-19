@@ -1,6 +1,7 @@
 # Introduction
 
 Django Admin 샘플 코드 #
+Admin Actions With View
 
 ## Preparation
 
