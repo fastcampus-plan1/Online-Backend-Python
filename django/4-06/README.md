@@ -1,6 +1,7 @@
 # Introduction
 
 Django Elastic Beanstalk 배포 #2
+Using S3 as static files backend with django-storage
 
 ## Preparation
 
