@@ -1,0 +1,18 @@
+if [ -d ".venv" ]; then
+    rm -rf .venv
+fi
+
+if [ -f "db.sqlite3" ]; then
+    rm db.sqlite3
+fi
+
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+
+export DJANGO_SUPERUSER_USERNAME=admin
+export DJANGO_SUPERUSER_EMAIL=admin@example.com
+export DJANGO_SUPERUSER_PASSWORD=password
+python manage.py createsuperuser --noinput
+

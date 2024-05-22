@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>포스트 등록</title>
+</head>
+<body>
+  <a href="{% url 'blog:post_create' %}">새 포스트 등록</a>
+  {% for post in posts %}
+    <div class="post">
+      <hr>
+      <a href="{% url 'blog:post_edit' post.pk %}">{{ post.pk }}번 포스트 편집</a>
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.content }}</p>
+    </div>
+  {% empty %}
+    <p>등록한 포스트가 없습니다.</p>
+  {% endfor %}
+</body>
+</html>

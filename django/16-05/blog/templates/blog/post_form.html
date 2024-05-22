@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>포스트 등록 &sol; 수정</title>
+</head>
+<body>
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">저장</button>
+  </form>
+</body>
+</html>
