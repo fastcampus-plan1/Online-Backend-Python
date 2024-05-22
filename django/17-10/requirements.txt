@@ -1,4 +1,4 @@
-django==5.0.3
-Pillow==10.2.0
+django==5.0.6
+Pillow==10.3.0
 
 django-admin-logs==1.2.0
