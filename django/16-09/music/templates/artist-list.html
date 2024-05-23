@@ -1,0 +1,22 @@
+{% extends '_page_base.html' %}
+
+{% block meta %}{{ block.super }}
+{% endblock %}
+
+{% block css %}{{ block.super }}
+{% endblock %}
+
+{% block title%}아티스트 목록{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h3>{{ page_title }}</h3>
+  <ul>
+    {% for artist in artists %}
+    <li><a href="{% url 'music:artist_detail' artist.id %}">{{ artist.name }}</a></li>
+    {% empty %}
+    <li>앨범이 없습니다.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

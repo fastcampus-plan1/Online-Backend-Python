@@ -1,0 +1,18 @@
+{% extends '_page_base.html' %}
+
+{% block meta %}{{ block.super }}
+{% endblock %}
+
+{% block css %}{{ block.super }}
+{% endblock %}
+
+{% block title%}링크{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h3>{{ page_title }}</h3>
+  <a href="{% url 'music:artist_list' %}">아티스트</a><br/>
+  <a href="{% url 'music:album_list' %}">앨범</a><br/>
+  <a href="{% url 'music:statistics' %}">통계</a><br/>
+</div>
+{% endblock %}

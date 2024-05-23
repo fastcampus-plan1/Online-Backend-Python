@@ -1,0 +1,32 @@
+{% extends '_page_base.html' %}
+
+{% block meta %}{{ block.super }}
+{% endblock %}
+
+{% block css %}{{ block.super }}
+{% endblock %}
+
+{% block title%}앨범: {{ album.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>{{ page_title }}</h2>
+  <div class="row">
+    <div class="col-md-4">
+      <img src="{{ album.image }}" alt="{{ album.name }}" class="img-responsive">
+    </div>
+    <div class="col-md-8">
+      <p>{{ album.description }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>곡</h3>
+      <ul>
+        {% for song in album.songs.all %}
+        <li>{{ song.title }}</a> {{ song.duration }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+</div>
+{% endblock %}

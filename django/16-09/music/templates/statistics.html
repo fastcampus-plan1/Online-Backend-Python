@@ -1,0 +1,22 @@
+{% extends '_page_base.html' %}
+
+{% block meta %}{{ block.super }}
+{% endblock %}
+
+{% block css %}{{ block.super }}
+{% endblock %}
+
+{% block title %}통계{% endblock %}
+
+{% block content %}
+  <div class="container">  
+    <h3>{{ page_title }}</h3>
+    <ul>
+      {% for key, value in statistics.items %}
+      <li>
+        {{ key }} : {{ value }}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

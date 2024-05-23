@@ -1,0 +1,41 @@
+{% extends '_page_base.html' %}
+
+{% block meta %}{{ block.super }}
+{% endblock %}
+
+{% block css %}{{ block.super }}
+{% endblock %}
+
+{% block title%}앨범 목록{% endblock %}
+
+{% block description%}앨범 목록 페이지입니디{% endblock %}
+
+{% block content %}
+  <div class="container">  
+    <h3>{{ page_title }}</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">앨범 이름</th>
+          <th scope="col">곡 수</th>
+          <th scope="col">전체 시간</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for album in albums %}
+        <tr>
+          <th scope="row">{{ album.id }}</th>
+          <td><a href="{% url 'music:album_detail' album.id %}">{{ album.title }}</a></td>
+          <td>{{ album.song_count }}</td>
+          <td>{{ album.total_duration }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <th scope="row" colspan="3">앨범이 없습니다</th>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
