@@ -1,0 +1,12 @@
+if [ -d ".venv" ]; then
+    rm -rf .venv
+fi
+
+if [ -f "db.sqlite3" ]; then
+    rm db.sqlite3
+fi
+
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python my_project/manage.py migrate

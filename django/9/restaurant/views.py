@@ -1,3 +1,7 @@
+from django.shortcuts import render, get_object_or_404
+
+from .models import Restaurant
+
 def index_view(request):
     return render(request, 'index.html')
 

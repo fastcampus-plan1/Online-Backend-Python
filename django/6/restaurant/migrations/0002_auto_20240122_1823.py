@@ -27,7 +27,7 @@ def add_restaurant_data(apps, schema_editor):
     ]
 
     phone_numbers = [f'02-1234-{i:04}' for i in range(9000, 9050)]
-    ratings = [round(random.uniform(3.5, 5.0), 1) for _ in range(50)]
+    ratings = [random.randint(3, 5) for _ in range(50)]
     menus = [
         '치킨', '불고기', '해물찜', '비빔밥', '순대국',
         '돈까스', '떡볶이', '갈비', '탕수육', '김밥'
@@ -54,9 +54,12 @@ def add_restaurant_data(apps, schema_editor):
             latitude=37.5665,
             longitude=126.9780,
             rating=r['rating'],
-            rating_count=1,
         ) for r in restaurants
     ])
+
+def reverse_add_restaurant_data(apps, schema_editor):
+    Restaurant = apps.get_model('restaurant', 'Restaurant')
+    Restaurant.objects.all().delete()
 
 
 class Migration(migrations.Migration):
@@ -66,5 +69,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(add_restaurant_data),
+        migrations.RunPython(add_restaurant_data, reverse_code=reverse_add_restaurant_data),
     ]

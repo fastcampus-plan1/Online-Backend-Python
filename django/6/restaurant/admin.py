@@ -7,10 +7,8 @@ class RestaurantAdmin(admin.ModelAdmin):
     list_display = [
         "id",
         "name",
-        "category",
         "phone",
         "rating",
-        "rating_count",
         "created_at",
         "updated_at",
     ]
